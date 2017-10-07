@@ -1,0 +1,24 @@
+public class IceCreamParlour {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int m = 3;
+        int n = 4;
+        int[] arr = {2,1,1,5};
+        ArrayList<Integer> list;
+        Map<Integer,ArrayList> menu = new HashMap<>(); 
+        for(int numFlavors = 0;numFlavors < arr.length;numFlavors++){
+            if(arr[numFlavors] <= m){
+                if(menu.containsKey(arr[numFlavors])){
+                    menu.get(arr[numFlavors]).add(numFlavors);
+                }
+                else{
+                    list = new ArrayList<>();
+                    list.add(numFlavors);
+                    menu.put(arr[numFlavors], list);
+                }
+            }
+        }
+        System.out.println(menu);
+    }
+}
