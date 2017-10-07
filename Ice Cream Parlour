@@ -1,24 +1,54 @@
+package ice.cream.parlour;
+import java.util.*;
+/**
+ *
+ * @author Shafayat Alam
+ */
 public class IceCreamParlour {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        int m = 3;
-        int n = 4;
-        int[] arr = {2,1,1,5};
-        ArrayList<Integer> list;
-        Map<Integer,ArrayList> menu = new HashMap<>(); 
-        for(int numFlavors = 0;numFlavors < arr.length;numFlavors++){
-            if(arr[numFlavors] <= m){
+        int money = 4;//How much money we have
+        int n = 4;//Number of flavors
+        int[] arr = {2,2,4,3};//the flavors
+        ArrayList<Integer> list;//An empty arraylist
+        Map<Integer,ArrayList> menu = new HashMap<>();//HashMap, takes integers as keys and an array list as values 
+        for(int numFlavors = 0;numFlavors < arr.length;numFlavors++){//Go throught all the flavors
+            /*
+             *Only put flavors in that costs less than or equal to the amount of money we have
+            */
+            if(arr[numFlavors] <= money){
+                /*
+                 *If there are multiple flavors with the same cost do this:
+                */
                 if(menu.containsKey(arr[numFlavors])){
-                    menu.get(arr[numFlavors]).add(numFlavors);
+                    menu.get(arr[numFlavors]).add(numFlavors);//Store the index of the new flavor in the array list
                 }
+                /*
+                 *If the flavor does not exist in the hash map
+                */
                 else{
-                    list = new ArrayList<>();
-                    list.add(numFlavors);
-                    menu.put(arr[numFlavors], list);
+                    list = new ArrayList<>();//allocate memory for an array list
+                    list.add(numFlavors);//put the index of the flavor in the list
+                    menu.put(arr[numFlavors], list);//put the flavor's cost as key and the array list as value in the hash map
                 }
             }
         }
-        System.out.println(menu);
+        
+        
+        /*
+         *Does not work from here:
+        */
+        for(int keys: menu.keySet()){//Go through the keys
+            if(keys == money){//If the current key costs all our money:
+                System.out.println("Flavor: " + keys);
+            }
+            if(menu.containsKey(money-keys) == false){//If money subtracted from the current key does now equal another key do this:
+                int a = keys;//The first flavor we chose is the current key 
+                int b = money-keys;//The second flavor we chose is this 
+                System.out.println("Next One: " + b + " " + a);//Print the two falvors
+                break;
+            }
+        }
     }
 }
