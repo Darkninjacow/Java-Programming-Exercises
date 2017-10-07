@@ -17,7 +17,7 @@ public class IceCreamParlour {
             /*
              *Only put flavors in that costs less than or equal to the amount of money we have
             */
-            if(arr[numFlavors] <= money){
+            if(arr[numFlavors] < money){
                 /*
                  *If there are multiple flavors with the same cost do this:
                 */
@@ -29,24 +29,29 @@ public class IceCreamParlour {
                 */
                 else{
                     list = new ArrayList<>();//allocate memory for an array list
-                    list.add(numFlavors);//put the index of the flavor in the list
+                    int index = numFlavors;
+                    list.add(index+1);//put the index of the flavor in the list
                     menu.put(arr[numFlavors], list);//put the flavor's cost as key and the array list as value in the hash map
                 }
             }
         }
-        
+        System.out.println("Menu" + menu);
         
         /*
+         *The problem is that in lines 55 and 57 I am getting the keys but I need the values of the hash map beacuse those
+         *are the index of the actual data set.
          *Does not work from here:
         */
         for(int keys: menu.keySet()){//Go through the keys
-            if(keys == money){//If the current key costs all our money:
-                System.out.println("Flavor: " + keys);
-            }
-            if(menu.containsKey(money-keys) == false){//If money subtracted from the current key does now equal another key do this:
-                int a = keys;//The first flavor we chose is the current key 
-                int b = money-keys;//The second flavor we chose is this 
-                System.out.println("Next One: " + b + " " + a);//Print the two falvors
+            //if(keys == money){//If the current key costs all our money:
+             //   System.out.println("Flavor: " + keys);
+            //}
+            if((money-keys) != keys){//If money subtracted from the current key does now equal another key do this:
+                int a = keys;//The first flavor we chose is the current key
+                System.out.println("a: " + a);
+                int b = money-keys;//The second flavor we chose is this
+                System.out.println("b: " + b);
+                System.out.println("Next One: " + a + " " + b);//Print the two falvors
                 break;
             }
         }
